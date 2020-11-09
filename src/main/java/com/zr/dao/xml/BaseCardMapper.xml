@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zr.dao.mapper.BaseCardMapper">
+  <resultMap id="BaseResultMap" type="com.zr.dao.entity.BaseCard">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="templete_id" jdbcType="BIGINT" property="templeteId" />
+    <result column="card_code" jdbcType="VARCHAR" property="cardCode" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="icon_url" jdbcType="VARCHAR" property="iconUrl" />
+    <result column="data_url" jdbcType="VARCHAR" property="dataUrl" />
+    <result column="component" jdbcType="VARCHAR" property="component" />
+    <result column="card_desc" jdbcType="VARCHAR" property="cardDesc" />
+    <result column="layout_info" jdbcType="VARCHAR" property="layoutInfo" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="is_del" jdbcType="BIT" property="isDel" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updator" jdbcType="VARCHAR" property="updator" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zr.dao.entity.BaseCard">
+    <result column="card_data" jdbcType="LONGVARCHAR" property="cardData" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, templete_id, card_code, title, icon_url, data_url, component, card_desc, layout_info, 
+    type, is_del, creator, create_time, updator, update_time
+  </sql>
+  <sql id="Blob_Column_List">
+    card_data
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from base_card
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from base_card
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zr.dao.entity.BaseCard">
+    insert into base_card (id, templete_id, card_code, 
+      title, icon_url, data_url, 
+      component, card_desc, layout_info, 
+      type, is_del, creator, create_time, 
+      updator, update_time, card_data
+      )
+    values (#{id,jdbcType=BIGINT}, #{templeteId,jdbcType=BIGINT}, #{cardCode,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{iconUrl,jdbcType=VARCHAR}, #{dataUrl,jdbcType=VARCHAR}, 
+      #{component,jdbcType=VARCHAR}, #{cardDesc,jdbcType=VARCHAR}, #{layoutInfo,jdbcType=VARCHAR}, 
+      #{type,jdbcType=TINYINT}, #{isDel,jdbcType=BIT}, #{creator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updator,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{cardData,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zr.dao.entity.BaseCard">
+    insert into base_card
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="templeteId != null">
+        templete_id,
+      </if>
+      <if test="cardCode != null">
+        card_code,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="iconUrl != null">
+        icon_url,
+      </if>
+      <if test="dataUrl != null">
+        data_url,
+      </if>
+      <if test="component != null">
+        component,
+      </if>
+      <if test="cardDesc != null">
+        card_desc,
+      </if>
+      <if test="layoutInfo != null">
+        layout_info,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updator != null">
+        updator,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="cardData != null">
+        card_data,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="templeteId != null">
+        #{templeteId,jdbcType=BIGINT},
+      </if>
+      <if test="cardCode != null">
+        #{cardCode,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="iconUrl != null">
+        #{iconUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="dataUrl != null">
+        #{dataUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="component != null">
+        #{component,jdbcType=VARCHAR},
+      </if>
+      <if test="cardDesc != null">
+        #{cardDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="layoutInfo != null">
+        #{layoutInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=BIT},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updator != null">
+        #{updator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cardData != null">
+        #{cardData,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zr.dao.entity.BaseCard">
+    update base_card
+    <set>
+      <if test="templeteId != null">
+        templete_id = #{templeteId,jdbcType=BIGINT},
+      </if>
+      <if test="cardCode != null">
+        card_code = #{cardCode,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="iconUrl != null">
+        icon_url = #{iconUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="dataUrl != null">
+        data_url = #{dataUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="component != null">
+        component = #{component,jdbcType=VARCHAR},
+      </if>
+      <if test="cardDesc != null">
+        card_desc = #{cardDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="layoutInfo != null">
+        layout_info = #{layoutInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=BIT},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updator != null">
+        updator = #{updator,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cardData != null">
+        card_data = #{cardData,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zr.dao.entity.BaseCard">
+    update base_card
+    set templete_id = #{templeteId,jdbcType=BIGINT},
+      card_code = #{cardCode,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      icon_url = #{iconUrl,jdbcType=VARCHAR},
+      data_url = #{dataUrl,jdbcType=VARCHAR},
+      component = #{component,jdbcType=VARCHAR},
+      card_desc = #{cardDesc,jdbcType=VARCHAR},
+      layout_info = #{layoutInfo,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      is_del = #{isDel,jdbcType=BIT},
+      creator = #{creator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updator = #{updator,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      card_data = #{cardData,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zr.dao.entity.BaseCard">
+    update base_card
+    set templete_id = #{templeteId,jdbcType=BIGINT},
+      card_code = #{cardCode,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      icon_url = #{iconUrl,jdbcType=VARCHAR},
+      data_url = #{dataUrl,jdbcType=VARCHAR},
+      component = #{component,jdbcType=VARCHAR},
+      card_desc = #{cardDesc,jdbcType=VARCHAR},
+      layout_info = #{layoutInfo,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      is_del = #{isDel,jdbcType=BIT},
+      creator = #{creator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updator = #{updator,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -2,7 +2,9 @@ package mybatis.generator.plugins;
 
 import org.mybatis.generator.api.*;
 import org.mybatis.generator.api.dom.java.Field;
+import org.mybatis.generator.api.dom.java.*;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
+import org.mybatis.generator.api.dom.xml.XmlElement;
 import org.mybatis.generator.config.TableConfiguration;
 
 import java.util.List;
@@ -61,10 +63,6 @@ public class GeneratorSwagger2Doc extends PluginAdapter {
         return super.modelFieldGenerated(field, topLevelClass, introspectedColumn, introspectedTable, modelClassType);
     }
     @Override
-    public boolean modelExampleClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
-        return false;
-    }
-     @Override
     public boolean modelExampleClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
         return false;
     }

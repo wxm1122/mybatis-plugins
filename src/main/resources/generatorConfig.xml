@@ -6,23 +6,22 @@
 <generatorConfiguration>
     <classPathEntry location="D:\mysql-connector-java-5.1.40.jar"/>
     <context id="testTables" targetRuntime="MyBatis3" >
-        <!-- 数据Model属性对应Column获取插件
+        <!--         数据Model属性对应Column获取插件-->
         <plugin type="mybatis.generator.plugins.GeneratorSwagger2Doc">
-            <property name="apiModelAnnotationPackage" value="io.swagger.annotations.ApiModel" />
-            <property name="apiModelPropertyAnnotationPackage" value="io.swagger.annotations.ApiModelProperty" />
+            <!--            <property name="apiModelAnnotationPackage" value="io.swagger.annotations.ApiModel" />-->
+            <!--            <property name="apiModelPropertyAnnotationPackage" value="io.swagger.annotations.ApiModelProperty" />-->
         </plugin>
 
-        <plugin type="mybatis.generator.plugins.ExtendEntitySetter" />
-  -->
+        <!--        <plugin type="mybatis.generator.plugins.ExtendEntitySetter" />-->
         <commentGenerator>
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
             <property name="suppressAllComments" value="true" />
         </commentGenerator>
         <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/bms_psc?characterEncoding=UTF-8&amp;useSSL=true&amp;serverTimezone=GMT%2B8"
-                        userId="develop"
-                        password="develop">
+                        connectionURL="jdbc:mysql://xxxxxx:3306/xxxxtable?useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false&amp;allowMultiQueries=true"
+                        userId="xxxx"
+                        password="xxxx">
         </jdbcConnection>
         <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和
             NUMERIC 类型解析为java.math.BigDecimal -->
@@ -54,7 +53,7 @@
         </javaClientGenerator>
 
         <!-- 指定数据库表 -->
-        <table tableName="dms_stock"><generatedKey column="id" sqlStatement="MySql" identity="true" /></table>
+        <table tableName="xxxx"></table>
 
 
         <!-- 有些表的字段需要指定java类型
