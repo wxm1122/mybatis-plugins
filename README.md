@@ -1,6 +1,9 @@
 # myBatisGeneratorPlugins
 
-通过数据字段备注直接生成对应的@ApiModelProperty和@JsonProperty
+    通过数据字段备注直接生成对应的
+    @ApiModelProperty
+    @JsonProperty
+    @Data
 
 -------------------------------------------------
 #### 效果案例
