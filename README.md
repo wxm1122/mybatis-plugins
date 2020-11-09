@@ -4,10 +4,13 @@
 
 -------------------------------------------------
 #### 效果案例
-    @ApiModelProperty(value="订单编号")
-    @JsonProperty("order_id")
-    private String orderId;
     
+    @Data
+    public class BaseCard {
+        @ApiModelProperty(value="订单编号")
+        @JsonProperty("order_id")
+        private String orderId;
+    }
     
 
 #### 怎么引入到项目中
@@ -47,9 +50,17 @@
 
 ```
 <context id="xxx-api">
-    <plugin type="mybatis.generator.plugins.GeneratorSwagger2Doc"/>
+    <plugin type="mybatis.generator.plugins.GeneratorSwagger2Doc">
+        <property name="apiModelAnnotationPackage" value="" />
+        <property name="JsonProperty" value="" />
+    </plugin>
+    或
+    <plugin type="mybatis.generator.plugins.GeneratorSwagger2Doc">
+    </plugin>
    ......
 </context>  
+不加入property  会默认生成
+  
  ```
 -------------------------------------
  

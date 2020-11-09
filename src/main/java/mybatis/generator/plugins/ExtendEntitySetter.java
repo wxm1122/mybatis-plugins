@@ -48,13 +48,19 @@ public class ExtendEntitySetter extends PluginAdapter {
 
     @Override
     public boolean modelSetterMethodGenerated(Method method, TopLevelClass topLevelClass, IntrospectedColumn introspectedColumn, IntrospectedTable introspectedTable, ModelClassType modelClassType) {
-        method.setReturnType(topLevelClass.getType());
-        method.addBodyLine("return this;");
-        logger.debug("Setter扩展完成");
-        return super.modelSetterMethodGenerated(method, topLevelClass, introspectedColumn, introspectedTable, modelClassType);
+//        method.setReturnType(topLevelClass.getType());
+//        method.addBodyLine("return this;");
+//        System.out.println("Setter扩展完成");
+//        去掉了set方法
+//        return super.modelSetterMethodGenerated(method, topLevelClass, introspectedColumn, introspectedTable, modelClassType);
+        return false;
     }
 
-
+    @Override
+    public boolean modelGetterMethodGenerated(Method method, TopLevelClass topLevelClass, IntrospectedColumn introspectedColumn, IntrospectedTable introspectedTable, ModelClassType modelClassType) {
+//        去掉了get方法
+        return false;
+    }
 
 
 }
