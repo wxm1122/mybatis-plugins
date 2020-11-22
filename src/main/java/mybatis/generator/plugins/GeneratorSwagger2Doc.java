@@ -1,11 +1,13 @@
 package mybatis.generator.plugins;
 
-import org.mybatis.generator.api.*;
+import org.mybatis.generator.api.IntrospectedColumn;
+import org.mybatis.generator.api.IntrospectedTable;
+import org.mybatis.generator.api.PluginAdapter;
 import org.mybatis.generator.api.dom.java.Field;
-import org.mybatis.generator.api.dom.java.*;
+import org.mybatis.generator.api.dom.java.Interface;
+import org.mybatis.generator.api.dom.java.Method;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.api.dom.xml.XmlElement;
-import org.mybatis.generator.config.TableConfiguration;
 
 import java.util.List;
 
@@ -44,12 +46,23 @@ public class GeneratorSwagger2Doc extends PluginAdapter {
     @Override
     public boolean modelFieldGenerated(Field field, TopLevelClass topLevelClass, IntrospectedColumn introspectedColumn, IntrospectedTable introspectedTable, ModelClassType modelClassType) {
 
-        //引入lombokData
         String lombokData = "@Data";
-        if (!topLevelClass.getAnnotations().contains(lombokData)) {
+        String Builder = "@Builder";
+        String AllArgsConstructor = "@AllArgsConstructor";
+        String NoArgsConstructor = "@NoArgsConstructor";
+        if (!topLevelClass.getAnnotations().contains(lombokData)
+                || !topLevelClass.getAnnotations().contains(NoArgsConstructor)
+                || !topLevelClass.getAnnotations().contains(AllArgsConstructor)
+                || !topLevelClass.getAnnotations().contains(Builder)) {
             topLevelClass.addAnnotation(lombokData);
+            topLevelClass.addAnnotation(Builder);
+            topLevelClass.addAnnotation(AllArgsConstructor);
+            topLevelClass.addAnnotation(NoArgsConstructor);
         }
         topLevelClass.addImportedType("lombok.Data");
+        topLevelClass.addImportedType("Builder");
+        topLevelClass.addImportedType("AllArgsConstructor");
+        topLevelClass.addImportedType("NoArgsConstructor");
 
 
         String apiModelAnnotationPackage = properties.getProperty("apiModelAnnotationPackage");
@@ -69,7 +82,7 @@ public class GeneratorSwagger2Doc extends PluginAdapter {
             field.addAnnotation("@ApiModelProperty(value=\"" + introspectedColumn.getJavaProperty() + introspectedColumn.getRemarks() + "\")");
         }
 
-        if(null == jsonProperty){
+        if (null == jsonProperty) {
             topLevelClass.addImportedType("com.fasterxml.jackson.annotation.JsonProperty");
             field.addAnnotation("@JsonProperty(\"" + introspectedColumn.getActualColumnName() + "\")");
         }
